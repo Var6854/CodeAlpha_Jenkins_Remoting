@@ -380,18 +380,6 @@ All the following steps have been **empirically executed and verified** in this 
 
 ---
 
-## 14. Screenshots Checklist for Submission
-
-Capture the following screenshots from your browser and terminal and place them in the `screenshots/` directory:
-
-1. `screenshots/01-jenkins-dashboard.png`: Jenkins home page showing the jobs list and zero executors on the Built-in node.
-2. `screenshots/02-node-management.png`: `Manage Jenkins -> Nodes` showing both `remote-linux-agent` and `windows-agent` with status **In sync / Online**.
-3. `screenshots/03-linux-agent-build-log.png`: Console output of Build #5 showing execution on `remote-linux-agent` (Linux kernel and hostname).
-4. `screenshots/04-windows-agent-build-log.png`: Console output of Build #2 showing execution on `windows-agent` (`Hostname: VIKAS`, Windows_NT).
-5. `screenshots/05-archived-artifacts.png`: Build page showing archived `CodeAlpha-Remoting-App-1.0.0.jar` and test reports.
-
----
-
-## 15. Conclusion
+## 14. Conclusion
 
 This project successfully demonstrates the deployment and operation of a production-grade **Distributed Build Architecture using Jenkins Remoting**. By decoupling the Controller from execution nodes, configuring inbound agents across both containerized Linux and native Windows environments, and isolating workspaces, we achieved a secure, resilient, and highly maintainable CI/CD setup following modern DevOps best practices.
