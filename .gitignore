@@ -1,0 +1,31 @@
+# Gradle build and cache artifacts
+.gradle/
+build/
+
+# Jenkins execution binaries and homes
+jenkins.war
+agent.jar
+remoting.jar
+jenkins-home/
+.jenkins/
+agent-workdir/
+agent-workspace/
+
+# Secrets, credentials and temporary keys
+*.secret
+secret.txt
+secrets/
+*.log
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.class
+
+# OS temporary files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+.DS_Store

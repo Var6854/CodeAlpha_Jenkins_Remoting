@@ -1,0 +1,43 @@
+jenkins:
+  systemMessage: "CodeAlpha Distributed Build Execution - Jenkins Controller"
+  numExecutors: 0
+  mode: EXCLUSIVE
+  slaveAgentPort: 50000
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin123"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  remotingSecurity:
+    enabled: true
+  nodes:
+    - permanent:
+        name: "remote-linux-agent"
+        remoteFS: "/home/jenkins/agent"
+        numExecutors: 2
+        labelString: "java-agent linux docker"
+        mode: NORMAL
+        launcher:
+          inbound:
+            workDirSettings:
+              disabled: false
+              workDirPath: "/home/jenkins/agent"
+    - permanent:
+        name: "windows-agent"
+        remoteFS: "C:/jenkins-agent-workspace"
+        numExecutors: 2
+        labelString: "java-agent windows host"
+        mode: NORMAL
+        launcher:
+          inbound:
+            workDirSettings:
+              disabled: false
+              workDirPath: "C:/jenkins-agent-workspace"
+
+unclassified:
+  location:
+    url: "http://localhost:8080/"

@@ -1,0 +1,8 @@
+FROM jenkins/jenkins:lts-jdk21
+USER root
+RUN jenkins-plugin-cli --plugins "workflow-aggregator git configuration-as-code"
+COPY jenkins.yaml /var/jenkins_home/jenkins.yaml
+COPY init.groovy.d/ /usr/share/jenkins/ref/init.groovy.d/
+ENV CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+USER jenkins
