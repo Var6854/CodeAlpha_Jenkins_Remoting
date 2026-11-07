@@ -26,7 +26,7 @@ pipeline {
                     } else {
                         echo "Cloning source code into isolated agent workspace..."
                         if (isUnix()) {
-                            sh 'git clone /repo . || git clone file:///repo . || true'
+                            sh 'git config --global --add safe.directory "*" && git clone /repo . || git clone file:///repo .'
                         } else {
                             bat 'git clone "C:/Users/Admin1/Documents/GitHub/CodeAlpha_Jenkins_Remoting" .'
                         }
