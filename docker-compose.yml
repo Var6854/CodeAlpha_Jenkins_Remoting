@@ -1,0 +1,36 @@
+services:
+  jenkins-controller:
+    build:
+      context: .
+      dockerfile: Dockerfile.controller
+    image: codealpha-jenkins-controller:latest
+    container_name: jenkins-controller
+    networks:
+      - jenkins-net
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    restart: unless-stopped
+
+  jenkins-linux-agent:
+    image: jenkins/inbound-agent:latest-jdk21
+    container_name: jenkins-linux-agent
+    networks:
+      - jenkins-net
+    depends_on:
+      - jenkins-controller
+    environment:
+      - JENKINS_URL=http://jenkins-controller:8080
+      - JENKINS_SECRET=94e52147a1ea09e53f49cfc701093d8d4a8530eac3d780cfe7584ca83b01e440
+      - JENKINS_AGENT_NAME=remote-linux-agent
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+    volumes:
+      - .:/repo:ro
+    restart: unless-stopped
+
+networks:
+  jenkins-net:
+    name: jenkins-net

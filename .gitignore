@@ -6,6 +6,7 @@ build/
 jenkins.war
 agent.jar
 remoting.jar
+jenkins-cli.jar
 jenkins-home/
 .jenkins/
 agent-workdir/
