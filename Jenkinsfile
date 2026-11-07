@@ -10,6 +10,32 @@ pipeline {
     }
 
     stages {
+        stage('Checkout Source Code') {
+            steps {
+                echo "=========================================================="
+                echo " Stage 1: Checkout Source Code on Agent: ${env.NODE_NAME}"
+                echo " Workspace: ${env.WORKSPACE}"
+                echo "=========================================================="
+                script {
+                    if (fileExists('.git')) {
+                        echo "Existing git repository found in workspace. Fetching updates..."
+                        if (isUnix()) {
+                            sh 'git pull origin main || true'
+                        } else {
+                            bat 'git pull origin main || exit /b 0'
+                        }
+                    } else {
+                        echo "Cloning source code into isolated agent workspace..."
+                        if (isUnix()) {
+                            sh 'git clone "file:///C:/Users/Admin1/Documents/GitHub/CodeAlpha_Jenkins_Remoting" . || true'
+                        } else {
+                            bat 'git clone "C:/Users/Admin1/Documents/GitHub/CodeAlpha_Jenkins_Remoting" .'
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Verify Remote Node & Environment') {
             steps {
                 echo "=========================================================="
