@@ -26,7 +26,7 @@ pipeline {
                     } else {
                         echo "Cloning source code into isolated agent workspace..."
                         if (isUnix()) {
-                            sh 'git clone "file:///C:/Users/Admin1/Documents/GitHub/CodeAlpha_Jenkins_Remoting" . || true'
+                            sh 'git clone /repo . || git clone file:///repo . || true'
                         } else {
                             bat 'git clone "C:/Users/Admin1/Documents/GitHub/CodeAlpha_Jenkins_Remoting" .'
                         }
@@ -79,7 +79,7 @@ pipeline {
                     if (isUnix()) {
                         sh 'chmod +x ./gradlew && ./gradlew compileJava --no-daemon'
                     } else {
-                        bat 'gradlew.bat compileJava --no-daemon'
+                        bat 'set JAVA_OPTS=-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT && gradlew.bat compileJava --no-daemon'
                     }
                 }
             }
@@ -92,7 +92,7 @@ pipeline {
                     if (isUnix()) {
                         sh './gradlew test --no-daemon'
                     } else {
-                        bat 'gradlew.bat test --no-daemon'
+                        bat 'set JAVA_OPTS=-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT && gradlew.bat test --no-daemon'
                     }
                 }
             }
@@ -110,7 +110,7 @@ pipeline {
                     if (isUnix()) {
                         sh './gradlew build --no-daemon'
                     } else {
-                        bat 'gradlew.bat build --no-daemon'
+                        bat 'set JAVA_OPTS=-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT && gradlew.bat build --no-daemon'
                     }
                 }
                 echo "Archiving artifact back to Jenkins controller..."
