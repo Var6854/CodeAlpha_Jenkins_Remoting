@@ -96,11 +96,6 @@ pipeline {
                     }
                 }
             }
-            post {
-                always {
-                    junit testResults: 'build/test-results/test/*.xml', allowEmptyResults: true
-                }
-            }
         }
 
         stage('Package & Archive Artifact') {
@@ -113,8 +108,8 @@ pipeline {
                         bat 'set JAVA_OPTS=-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT && gradlew.bat build --no-daemon'
                     }
                 }
-                echo "Archiving artifact back to Jenkins controller..."
-                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true, allowEmptyArchive: false
+                echo "Archiving artifacts and test reports back to Jenkins controller..."
+                archiveArtifacts artifacts: 'build/libs/*.jar, build/reports/tests/**', fingerprint: true, allowEmptyArchive: false
             }
         }
     }
