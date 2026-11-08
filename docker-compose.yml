@@ -13,6 +13,8 @@ services:
     environment:
       - CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+      - JENKINS_ADMIN_USER=${JENKINS_ADMIN_USER:-admin}
+      - JENKINS_ADMIN_PASSWORD=${JENKINS_ADMIN_PASSWORD}
     restart: unless-stopped
 
   jenkins-linux-agent:
@@ -24,7 +26,7 @@ services:
       - jenkins-controller
     environment:
       - JENKINS_URL=http://jenkins-controller:8080
-      - JENKINS_SECRET=94e52147a1ea09e53f49cfc701093d8d4a8530eac3d780cfe7584ca83b01e440
+      - JENKINS_SECRET=${JENKINS_AGENT_SECRET_LINUX}
       - JENKINS_AGENT_NAME=remote-linux-agent
       - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
     volumes:

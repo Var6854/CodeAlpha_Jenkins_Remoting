@@ -13,9 +13,20 @@ agent-workdir/
 agent-workspace/
 
 # Secrets, credentials and temporary keys
+.env
+.env.*
+!.env.example
 *.secret
 secret.txt
 secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+cookies.txt
+job-config.xml
+update-job.groovy
 *.log
 
 # IDE files
