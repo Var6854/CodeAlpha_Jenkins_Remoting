@@ -1,7 +1,0 @@
-# Screenshots Directory
-Store evidence screenshots here:
-1. Jenkins Controller Dashboard showing 0 executors on Built-in node
-2. Nodes Management page showing connected online remote agents
-3. Pipeline configuration with agent label 'java-agent'
-4. Pipeline execution console log proving build ran on the remote agent
-5. Build artifacts archived on the controller

@@ -1,2 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Binary files - preserve exact byte structure
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+*.jar binary
